@@ -14,7 +14,7 @@ func CityHandler(res http.ResponseWriter, req *http.Request) {
 }
 
 func IndexHandler (res http.ResponseWriter, req *http.Request) {
-	data, _ := json.Marshal("hello, world")
+	data, _ := json.Marshal("making a change")
 	res.Header().Set("Content-Type", "application/json; charset=utf-8")
 	res.Write(data)
 }
