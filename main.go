@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"os"
 )
 
 func CityHandler(res http.ResponseWriter, req *http.Request) {
@@ -12,9 +13,20 @@ func CityHandler(res http.ResponseWriter, req *http.Request) {
 	res.Write(data)
 }
 
+func IndexHandler (res http.ResponseWriter, req *http.Request) {
+	data, _ := json.Marshal("hello, world")
+	res.Header().Set("Content-Type", "application/json; charset=utf-8")
+	res.Write(data)
+}
+
 func main() {
+	port := os.Getenv("PORT") 
+	if  port == "" {
+		port = ":5000"
+	}
+	http.HandleFunc("/", IndexHandler)
 	http.HandleFunc("/cities.json", CityHandler)
-	err := http.ListenAndServe(":5000", nil)
+	err := http.ListenAndServe(port, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
