@@ -22,11 +22,11 @@ func IndexHandler (res http.ResponseWriter, req *http.Request) {
 func main() {
 	port := os.Getenv("PORT") 
 	if  port == "" {
-		port = ":5000"
+		port = "5000"
 	}
 	http.HandleFunc("/", IndexHandler)
 	http.HandleFunc("/cities.json", CityHandler)
-	err := http.ListenAndServe(port, nil)
+	err := http.ListenAndServe(":" + port, nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
